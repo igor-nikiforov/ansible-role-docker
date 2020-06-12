@@ -1,0 +1,11 @@
+---
+docker_install: true
+
+
+# Docker Compose
+docker_compose_install: true
+docker_compose_version: "1.25.4"
+docker_compose_path: /usr/local/bin
+
+# A list of users who will be added to the docker group
+docker_users: []

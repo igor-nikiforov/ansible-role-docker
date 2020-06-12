@@ -1,0 +1,78 @@
+---
+- name: Ensure old versions of Docker are not installed
+  package:
+    name:
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-engine
+      - docker.io
+      - containerd
+      - runc
+    state: absent
+
+- name: Install Docker (Debian)
+  block:
+    - name: Add Docker apt key.
+      apt_key:
+        url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+        state: present
+    - apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+        state: present
+        update_cache: true
+    - apt:
+        pkg:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+  when: ansible_os_family == 'Debian'
+
+- name: Install Docker (RHEL)
+  block:
+    - yum_repository:
+        name: docker-ce-stable
+        description: Docker CE Stable
+        baseurl: https://download.docker.com/linux/{{ ansible_distribution | lower }}/7/$basearch/stable
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+    - yum:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        enablerepo: docker-ce-stable
+        state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: Start Docker systemd service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Install Docker Compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
+    dest: "{{ docker_compose_path }}/docker-compose"
+    mode: 0755
+  when: docker_compose_install
+
+- name: Ensure docker group exists
+  group:
+    name: docker
+    state: present
+
+- name: Ensure docker users are added to the docker group
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: true
+  with_items: "{{ docker_users }}"
+  when: docker_users | length > 0
