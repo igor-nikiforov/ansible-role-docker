@@ -60,8 +60,9 @@
 
 - name: Ensure the docker python lib is installed.
   pip:
-    name: docker
+    name: docker-py
     version: "{{ docker_py_version | default(omit) }}"
+  when: docker_py_install
 
 - name: Install Docker Compose
   get_url:
