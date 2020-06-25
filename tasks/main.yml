@@ -57,6 +57,12 @@
     state: started
     enabled: yes
 
+
+- name: Ensure the docker python lib is installed.
+  pip:
+    name: docker
+    version: "{{ docker_py_version | default(omit) }}"
+
 - name: Install Docker Compose
   get_url:
     url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64

@@ -2,6 +2,7 @@
 docker_install: true
 
 docker_py_install: true
+docker_py_version:
 
 # Docker Compose
 docker_compose_install: true
