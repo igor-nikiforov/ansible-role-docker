@@ -57,10 +57,9 @@
     state: started
     enabled: yes
 
-
 - name: Ensure the docker python lib is installed.
   pip:
-    name: docker-py
+    name: docker
     version: "{{ docker_py_version | default(omit) }}"
   when: docker_py_install
 
