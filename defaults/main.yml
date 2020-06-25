@@ -1,7 +1,7 @@
 ---
 docker_install: true
 
-docker_install_docker_py: true
+docker_py_install: true
 
 # Docker Compose
 docker_compose_install: true
