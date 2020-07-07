@@ -1,8 +1,7 @@
 ---
 docker_install: true
 
-docker_py_install: true
-docker_py_version:
+docker_sdk_for_python_install: true
 
 # Docker Compose
 docker_compose_install: true
