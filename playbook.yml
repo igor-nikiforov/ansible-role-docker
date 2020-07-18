@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: true
+
+  roles:
+    - docker
+
+  vars:
+    docker_sdk_for_python_install: true
+    docker_compose_install: true
+    docker_compose_version: "1.26.2"
