@@ -9,3 +9,22 @@
     docker_sdk_for_python_install: true
     docker_compose_install: true
     docker_compose_version: "1.26.2"
+
+    docker_daemon_configuration:
+      bip: 192.168.0.1/24
+      default-address-pools:
+        - base: 172.80.0.0/16
+          size: 24
+        - base: 172.80.0.0/16
+          size: 24
+      log-driver: "json-file"
+      log-opts:
+        max-size: "10m"
+        max-file: "5"
+        labels: "somelabel"
+        env: "os,customer"
+      tls: true
+      tlsverify: true
+      tlscacert: ""
+      tlscert: ""
+      tlskey: ""
