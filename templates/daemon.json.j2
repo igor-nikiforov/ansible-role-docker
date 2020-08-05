@@ -1,26 +1,37 @@
 {
+{% if docker_daemon_configuration.bip is defined %}
   "bip": "{{ docker_daemon_configuration.bip }}",
-  {% for collector in node_exporter_disabled_collectors %}
-  "tls": true,
-  {% endfor %}
-  "tlsverify": true,
-  "tlscacert": "",
-  "tlscert": "",
-  "tlskey": "",
-  "default-address-pools":[
-    {% for user in userlist %}
-    {"base":"172.80.0.0/16","size":24},
-    {"base":"172.90.0.0/16","size":24}
-    {{ "," if not loop.last }}
-    {% endfor %}
-  ],
-  {% for collector in node_exporter_disabled_collectors %}
-  "log-driver": "{{ docker_daemon_configuration.log-driver }}",
-  {% endfor %}
+{% endif %}
+{% if docker_daemon_configuration.tls is defined %}
+  "tls": {{ docker_daemon_configuration.tls }},
+{% endif %}
+{% if docker_daemon_configuration.tlsverify is defined %}
+  "tlsverify": {{ docker_daemon_configuration.tlsverify }},
+{% endif %}
+{% if docker_daemon_configuration.tlscacert is defined %}
+  "tlscacert": "{{ docker_daemon_configuration.tlscacert }}",
+{% endif %}
+{% if docker_daemon_configuration.tlscert is defined %}
+  "tlscert": "{{ docker_daemon_configuration.tlscert }}",
+{% endif %}
+{% if docker_daemon_configuration.tlskey is defined %}
+  "tlskey": "{{ docker_daemon_configuration.tlskey }}",
+{% endif %}
+{% if docker_daemon_configuration.log_driver is defined %}
+  "log-driver": "{{ docker_daemon_configuration.log_driver }}",
+{% endif %}
   "log-opts": {
-    "max-size": "{{ docker_daemon_configuration.log-opts.max-size }}",
-    "max-file":"{{ docker_daemon_configuration.log-opts.max-file }}",
-    "labels": "{{ docker_daemon_configuration.log-opts.labels }}",
-    "env": "{{ docker_daemon_configuration.log-opts.env }}"
+{% if docker_daemon_configuration.log_opts.max_size is defined %}
+    "max-size": "{{ docker_daemon_configuration.log_opts.max_size }}",
+{% endif %}
+{% if docker_daemon_configuration.log_opts.max_file is defined %}
+    "max-file":"{{ docker_daemon_configuration.log_opts.max_file }}",
+{% endif %}
+{% if docker_daemon_configuration.log_opts.labels is defined %}
+    "labels": "{{ docker_daemon_configuration.log_opts.labels }}",
+{% endif %}
+{% if docker_daemon_configuration.log_opts.env is defined %}
+    "env": "{{ docker_daemon_configuration.log_opts.env }}"
+{% endif %}
   }
 }
