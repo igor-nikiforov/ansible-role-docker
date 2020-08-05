@@ -17,6 +17,9 @@
           size: 24
         - base: 172.80.0.0/16
           size: 24
+      dns:
+        - 8.8.8.8
+        - 8.8.4.4
       log_driver: "json-file"
       log_opts:
         max_size: "10m"
