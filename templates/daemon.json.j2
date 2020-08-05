@@ -3,10 +3,10 @@
   "bip": "{{ docker_daemon_configuration.bip }}",
 {% endif %}
 {% if docker_daemon_configuration.tls is defined %}
-  "tls": {{ docker_daemon_configuration.tls }},
+  "tls": {{ docker_daemon_configuration.tls | lower }},
 {% endif %}
 {% if docker_daemon_configuration.tlsverify is defined %}
-  "tlsverify": {{ docker_daemon_configuration.tlsverify }},
+  "tlsverify": {{ docker_daemon_configuration.tlsverify | lower }},
 {% endif %}
 {% if docker_daemon_configuration.tlscacert is defined %}
   "tlscacert": "{{ docker_daemon_configuration.tlscacert }}",
