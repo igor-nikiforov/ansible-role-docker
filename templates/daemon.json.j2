@@ -20,6 +20,7 @@
 {% if docker_daemon_configuration.log_driver is defined %}
   "log-driver": "{{ docker_daemon_configuration.log_driver }}",
 {% endif %}
+{% if docker_daemon_configuration.log_opts is defined %}
   "log-opts": {
 {% if docker_daemon_configuration.log_opts.max_size is defined %}
     "max-size": "{{ docker_daemon_configuration.log_opts.max_size }}",
@@ -34,4 +35,5 @@
     "env": "{{ docker_daemon_configuration.log_opts.env }}"
 {% endif %}
   }
+{% endif %}
 }
