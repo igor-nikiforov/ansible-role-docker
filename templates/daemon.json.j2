@@ -3,10 +3,10 @@
   "bip": "{{ docker_daemon_configuration.bip }}",
 {% endif %}
 {% if docker_daemon_configuration.default_address_pools is defined %}
-  "default-address-pools":[{% for item in docker_daemon_configuration.default_address_pools %}{"base":"{{ item.base }}","size":{{ item.size }}}{% if not loop.last %},{% endif %}{% endfor %}]
+  "default-address-pools":[{{ docker_daemon_configuration.default_address_pools | map("to_json") | join(",") }}],
 {% endif %}
 {% if docker_daemon_configuration.dns is defined %}
-  "dns": [{{ docker_daemon_configuration.dns | map("to_json") | join(",") }}]
+  "dns": [{{ docker_daemon_configuration.dns | map("to_json") | join(",") }}],
 {% endif %}
 {% if docker_daemon_configuration.tls is defined %}
   "tls": {{ docker_daemon_configuration.tls | lower }},
