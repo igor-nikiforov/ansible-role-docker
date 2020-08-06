@@ -6,7 +6,7 @@
   "default-address-pools":[{% for item in docker_daemon_configuration.default_address_pools %}{"base":"{{ item.base }}","size":{{ item.size }}}{% if not loop.last %},{% endif %}{% endfor %}]
 {% endif %}
 {% if docker_daemon_configuration.dns is defined %}
-  "dns": [{% for dns in docker_daemon_configuration.dns %}"{{ dns }}"{% if not loop.last %},{% endif %}{% endfor %}],
+  "dns": [{{ docker_daemon_configuration.dns | map("to_json") | join(",") }}]
 {% endif %}
 {% if docker_daemon_configuration.tls is defined %}
   "tls": {{ docker_daemon_configuration.tls | lower }},
