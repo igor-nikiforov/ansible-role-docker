@@ -29,9 +29,14 @@
     - apt:
         pkg:
           - docker-ce
-          - docker-ce-cli
-          - containerd.io
   when: ansible_os_family == 'Debian'
+
+# Temporary workaround
+- name: Install containerd separately (CentOS 8).
+  yum:
+    name: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm
+    state: present
+  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version == 8
 
 - name: Install Docker (RHEL)
   block:
@@ -45,8 +50,6 @@
     - yum:
         name:
           - docker-ce
-          - docker-ce-cli
-          - containerd.io
         enablerepo: docker-ce-stable
         state: present
   when: ansible_os_family == 'RedHat'
