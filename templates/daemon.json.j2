@@ -17,6 +17,9 @@
 {% if docker_daemon_configuration.tlskey is defined %}
   "tlskey": "{{ docker_daemon_configuration.tlskey }}",
 {% endif %}
+{% if docker_daemon_configuration.storage_driver is defined %}
+  "storage-driver": "{{ docker_daemon_configuration.storage_driver }}",
+{% endif %}
 {% if docker_daemon_configuration.log_driver is defined %}
   "log-driver": "{{ docker_daemon_configuration.log_driver }}",
 {% endif %}

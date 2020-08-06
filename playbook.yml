@@ -20,6 +20,7 @@
       dns:
         - 8.8.8.8
         - 8.8.4.4
+      storage_driver: "overlay2"
       log_driver: "json-file"
       log_opts:
         max_size: "10m"
