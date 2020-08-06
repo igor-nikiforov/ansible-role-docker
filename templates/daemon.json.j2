@@ -1,4 +1,7 @@
 {
+{% if docker_daemon_configuration.default_address_pools is defined %}
+  "default-address-pools":[{% for item in docker_daemon_configuration.default_address_pools %}{"base":"{{ item.base }}","size":{{ item.size }}}{% if not loop.last %},{% endif %}{% endfor %}]
+{% endif %}
 {% if docker_daemon_configuration.bip is defined %}
   "bip": "{{ docker_daemon_configuration.bip }}",
 {% endif %}
