@@ -1,4 +1,12 @@
 {
+  "runtimes": {
+{% if docker_nvidia_container_runtime_install is defined %}
+    "nvidia": {
+      "path": "/usr/bin/nvidia-container-runtime",
+      "runtimeArgs": []
+    }
+{% endif %}
+  }
 {% if docker_daemon_configuration.bip is defined %}
   "bip": "{{ docker_daemon_configuration.bip }}",
 {% endif %}

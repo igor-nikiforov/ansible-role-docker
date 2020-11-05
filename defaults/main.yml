@@ -5,8 +5,11 @@ docker_sdk_for_python_install: true
 
 # Docker Compose
 docker_compose_install: true
-docker_compose_version: "1.26.2"
+docker_compose_version: "1.27.4"
 docker_compose_path: /usr/local/bin
 
 # A list of users who will be added to the docker group
 docker_users: []
+
+# NVIDIA container runtime
+docker_nvidia_container_runtime_install: false
