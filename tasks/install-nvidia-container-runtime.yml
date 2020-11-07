@@ -17,4 +17,3 @@
   when:
     - ansible_os_family == 'RedHat'
     - docker_nvidia_container_runtime_install
-  notify: docker restart
