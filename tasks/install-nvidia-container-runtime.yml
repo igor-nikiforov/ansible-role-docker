@@ -2,8 +2,17 @@
 - name: Install NVIDIA container runtime
   block:
     - yum_repository:
+        name: libnvidia-container
+        description: libnvidia-container
+        baseurl: https://nvidia.github.io/libnvidia-container/stable/{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}/$basearch
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: https://nvidia.github.io/libnvidia-container/gpgkey
+        sslverify: yes
+        sslcacert: /etc/pki/tls/certs/ca-bundle.crt
+    - yum_repository:
         name: nvidia-container-runtime
-        description: NVIDIA container runtime
+        description: nvidia-container-runtime
         baseurl: https://nvidia.github.io/nvidia-container-runtime/stable/{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}/$basearch
         enabled: yes
         gpgcheck: yes
