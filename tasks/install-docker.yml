@@ -1,0 +1,63 @@
+---
+- name: Ensure old versions of Docker are not installed
+  package:
+    name:
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-engine
+      - docker.io
+      - containerd
+      - runc
+    state: absent
+
+- name: Install Docker (Debian)
+  block:
+    - name: Add Docker apt key.
+      apt_key:
+        url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+        state: present
+    - apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+        state: present
+        update_cache: true
+    - apt:
+        pkg:
+          - docker-ce
+  when: ansible_os_family == 'Debian'
+
+# Temporary workaround
+#- name: Install containerd separately (CentOS 8).
+#  yum:
+#    name: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm
+#    state: present
+#  when:
+#    - ansible_os_family == 'RedHat'
+#    - ansible_distribution_major_version == "8"
+
+- name: Install Docker (RHEL)
+  block:
+    - yum_repository:
+        name: docker-ce-stable
+        description: Docker CE Stable
+        baseurl: https://download.docker.com/linux/{{ ansible_distribution | lower }}/7/$basearch/stable
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+    - yum:
+        name:
+          - docker-ce
+        enablerepo: docker-ce-stable
+        state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: Start Docker systemd service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes

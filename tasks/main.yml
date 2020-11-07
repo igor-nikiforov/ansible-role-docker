@@ -1,107 +1,19 @@
 ---
-- name: Ensure old versions of Docker are not installed
-  package:
-    name:
-      - docker
-      - docker-client
-      - docker-client-latest
-      - docker-common
-      - docker-latest
-      - docker-latest-logrotate
-      - docker-logrotate
-      - docker-engine
-      - docker.io
-      - containerd
-      - runc
-    state: absent
+- include_tasks: install-docker.yml
+  when: docker_install
 
-- name: Install Docker (Debian)
-  block:
-    - name: Add Docker apt key.
-      apt_key:
-        url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
-        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-        state: present
-    - apt_repository:
-        repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
-        state: present
-        update_cache: true
-    - apt:
-        pkg:
-          - docker-ce
-  when: ansible_os_family == 'Debian'
-
-# Temporary workaround
-- name: Install containerd separately (CentOS 8).
-  yum:
-    name: https://download.docker.com/linux/centos/7/x86_64/stable/Packages/containerd.io-1.2.13-3.2.el7.x86_64.rpm
-    state: present
-  when:
-    - ansible_os_family == 'RedHat'
-    - ansible_distribution_major_version == "8"
-
-- name: Install Docker (RHEL)
-  block:
-    - yum_repository:
-        name: docker-ce-stable
-        description: Docker CE Stable
-        baseurl: https://download.docker.com/linux/{{ ansible_distribution | lower }}/7/$basearch/stable
-        enabled: yes
-        gpgcheck: yes
-        gpgkey: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
-    - yum:
-        name:
-          - docker-ce
-        enablerepo: docker-ce-stable
-        state: present
-  when: ansible_os_family == 'RedHat'
-
-- name: Start Docker systemd service
-  systemd:
-    name: docker
-    state: started
-    enabled: yes
-
-- name: Install Docker SDK for Python
-  pip:
-    name: docker
+- include_tasks: install-docker-sdk-for-python.yml
   when: docker_sdk_for_python_install
 
-- name: Install Docker Compose
-  get_url:
-    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64
-    dest: "{{ docker_compose_path }}/docker-compose"
-    mode: 0755
+- include_tasks: install-docker-compose.yml
   when: docker_compose_install
 
-- name: Ensure docker group exists
-  group:
-    name: docker
-    state: present
+- include_tasks: install-nvidia-container-runtime.yml
+  when: docker_nvidia_container_runtime_install
 
-- name: Ensure docker users are added to the docker group
-  user:
-    name: "{{ item }}"
-    groups: docker
-    append: true
-  with_items: "{{ docker_users }}"
-  when: docker_users | length > 0
-
-- name: Install NVIDIA container runtime
-  block:
-    - yum_repository:
-        name: nvidia-container-runtime
-        baseurl: https://nvidia.github.io/nvidia-container-runtime/stable/{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}/$basearch
-        enabled: yes
-        gpgcheck: yes
-        gpgkey: https://nvidia.github.io/nvidia-container-runtime/gpgkey
-        sslverify: yes
-        sslcacert: /etc/pki/tls/certs/ca-bundle.crt
-    - yum:
-        name:
-          - nvidia-container-runtime
-        enablerepo: nvidia-container-runtime
-        state: present
+- include_tasks: configure-docker-daemon.yml
   when:
-    - ansible_os_family == 'RedHat'
-    - docker_nvidia_container_runtime_install
+   - docker_daemon_configuration | length > 0 or docker_nvidia_container_runtime_install
+
+- name: Ensure handlers are notified now to avoid firewall conflicts.
+  meta: flush_handlers
