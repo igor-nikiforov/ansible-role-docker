@@ -1,15 +1,7 @@
 ---
-- name: Configure Docker daemon
-  block:
-    - name: Copy Docker daemon configuration
-      template:
-        src: daemon.json.j2
-        dest: /etc/docker/daemon.json
-        mode: 0644
-      notify: docker restart
-
-- name: Fix the broken JSON
-  replace:
-    path: /etc/docker/daemon.json
-    regexp: ',.*$\n\Z'
-    replace: '\n  } \n}'
+- name: Configure Docker daemon.
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    mode: 0644
+  notify: restart docker

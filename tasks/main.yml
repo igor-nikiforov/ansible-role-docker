@@ -1,19 +1,26 @@
 ---
-- include_tasks: install-docker.yml
-  when: docker_install
+- include_tasks: install-docker-RHEL.yml
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: install-docker-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Start Docker systemd service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- include_tasks: configure-docker-daemon.yml
+  when: docker_daemon_config | length > 0
+
+- meta: flush_handlers
+
+- include_tasks: add-docker-users.yml
+  when: docker_users | length > 0
 
 - include_tasks: install-docker-sdk-for-python.yml
   when: docker_sdk_for_python_install
 
 - include_tasks: install-docker-compose.yml
   when: docker_compose_install
-
-- include_tasks: install-nvidia-container-runtime.yml
-  when: docker_nvidia_container_runtime_install
-
-- include_tasks: configure-docker-daemon.yml
-  when:
-   - docker_daemon_configuration | length > 0 or docker_nvidia_container_runtime_install
-
-- name: Ensure handlers are notified now to avoid firewall conflicts.
-  meta: flush_handlers

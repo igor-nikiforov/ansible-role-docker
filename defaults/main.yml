@@ -1,16 +1,20 @@
 ---
-docker_install: true
+docker_install: True
+
+docker_version: "latest"
+
+# Docker daemon configuration
+docker_daemon_config: {}
 
 # A list of users who will be added to the docker group
 docker_users: []
 
 # Docker SDK for Python
-docker_sdk_for_python_install: true
+docker_sdk_for_python_install: True
+
+docker_sdk_for_python_version: "latest"
 
 # Docker Compose
-docker_compose_install: true
-docker_compose_version: "1.27.4"
-docker_compose_path: /usr/local/bin
+docker_compose_install: False
 
-# NVIDIA container runtime
-docker_nvidia_container_runtime_install: false
+docker_compose_version: "latest"
