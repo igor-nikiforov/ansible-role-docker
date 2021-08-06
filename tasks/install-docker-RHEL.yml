@@ -1,6 +1,6 @@
 ---
 - name: Ensure old versions of Docker are not installed.
-  package:
+  yum:
     name:
       - docker
       - docker-client
@@ -20,13 +20,14 @@
 - name: Configure Docker repository.
   get_url:
     url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/docker-ce.repo
-    dest: /etc/yum.repos.d/docker-ce.repo'
+    dest: /etc/yum.repos.d/docker-ce.repo
     owner: root
     group: root
     mode: 0644
 
 - name: Install Docker.
-  package:
+  yum:
+    update_cache: yes
     name:
       - "docker-ce{% if docker_version != 'latest' %}-{{ docker_version }}{% endif %}"
       - "docker-ce-cli{% if docker_version != 'latest' %}-{{ docker_version }}{% endif %}"
