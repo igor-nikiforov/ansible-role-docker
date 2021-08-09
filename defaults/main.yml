@@ -6,11 +6,15 @@ docker_version: "latest"
 # Docker daemon configuration
 docker_daemon_config: {}
 
+docker_service_enabled: True
+
+docker_service_state: "started"
+
 # A list of users who will be added to the docker group
 docker_users: []
 
 # Docker SDK for Python
-docker_sdk_for_python_install: True
+docker_sdk_for_python_install: False
 
 docker_sdk_for_python_version: "latest"
 

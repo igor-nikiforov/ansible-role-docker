@@ -1,5 +1,5 @@
 ---
-- name: docker restart
+- name: restart docker
   systemd:
     name: docker
     state: restarted

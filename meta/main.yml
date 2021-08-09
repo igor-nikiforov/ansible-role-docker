@@ -5,7 +5,7 @@ galaxy_info:
   description: Install and configure Docker
   license: MIT
   company: none
-  min_ansible_version: 2.10
+  min_ansible_version: 2.9
   platforms:
     - name: Ubuntu
       versions:
@@ -25,7 +25,7 @@ galaxy_info:
         - 31
   galaxy_tags:
     - docker
-    - docker-compose
+    - compose
     - container
     - containers
     - packaging
