@@ -1,6 +1,6 @@
 ---
 - name: Ensure old versions of Docker are not installed.
-  yum:
+  dnf:
     name:
       - docker
       - docker-client
