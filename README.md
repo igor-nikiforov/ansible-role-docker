@@ -56,8 +56,7 @@ Other OS distributions was not tested but will probably work. In case if not ple
 
 ## Usage
 
-Role supports all Docker daemon configuration parametes which could be passed via ```docker_daemon_config``` variable. You could find example of JSON config format in [Docker official documentation](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file). For usage in role you should convert config from JSON to YAML format, for example using [this online tool](https://www.json2yaml.com/).
-
+Role supports all Docker daemon configuration parameters which could be passed via ```docker_daemon_config``` variable. You could find example of JSON config format in [Docker official documentation](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file). For usage in role you should convert config from JSON to YAML format, for example using [this online tool](https://www.json2yaml.com/).
 
 ### Examples
 
