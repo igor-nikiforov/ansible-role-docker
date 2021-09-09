@@ -11,7 +11,7 @@
       - docker-logrotate
       - docker-engine
     state: absent
-  when: ansible_distribution_major_version < 8
+  when: ansible_distribution_major_version | int < 8
 
 - name: Ensure old versions of Docker are not installed.
   dnf:
@@ -25,7 +25,7 @@
       - docker-logrotate
       - docker-engine
     state: absent
-  when: ansible_distribution_major_version >= 8
+  when: ansible_distribution_major_version | int >= 8
 
 - name: Add Docker GPG key.
   rpm_key:
@@ -48,7 +48,7 @@
       - "docker-ce-cli{% if docker_version != 'latest' %}-{{ docker_version }}{% endif %}"
       - "containerd.io"
     state: "{{ 'latest' if docker_version == 'latest' else 'present' }}"
-  when: ansible_distribution_major_version < 8
+  when: ansible_distribution_major_version | int < 8
 
 - name: Install Docker.
   dnf:
@@ -58,4 +58,4 @@
       - "docker-ce-cli{% if docker_version != 'latest' %}-{{ docker_version }}{% endif %}"
       - "containerd.io"
     state: "{{ 'latest' if docker_version == 'latest' else 'present' }}"
-  when: ansible_distribution_major_version >= 8
+  when: ansible_distribution_major_version | int >= 8

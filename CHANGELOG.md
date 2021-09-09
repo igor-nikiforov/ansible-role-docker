@@ -1,3 +1,15 @@
+## 1.2.0
+### September 9th, 2021
+
+CHANGES:
+
+* Support for bash completion in Docker (```docker_bash_completion_install```) and Docker Compose (```docker_compose_bash_completion_install```).
+* Added names to each include_tasks in main task for more readability.
+
+BUG FIXES:
+
+* Fixed ```when``` condition in RHEL version detection.
+
 ## 1.1.0
 ### August 9th, 2021
 
