@@ -68,7 +68,7 @@ Role supports all Docker daemon configuration parameters which could be passed v
   gather_facts: False
 
   pre_tasks:
-    - wait_for_connection: {timeout: 300}
+    - wait_for_connection: { timeout: 300 }
     - setup:
 
   vars:
