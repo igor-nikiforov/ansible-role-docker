@@ -1,4 +1,7 @@
 ---
+- name: Detect architecture.
+  include_tasks: detect-architecture.yml
+
 - name: Install Docker (RHEL).
   include_tasks: install-docker-RHEL.yml
   when: ansible_os_family == 'RedHat'

@@ -41,20 +41,21 @@ Other OS distributions was not tested but will probably work. In case if not ple
 
 ## Variables
 
-| Name                                                                                                                                              | Description                                               | Default   |
-|---------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|-----------|
-| <a name="docker_install"></a> [docker_install](#variable\_docker_install)                                                                         | If True, Docker will be installed                         | `true`    |
-| <a name="docker_version"></a> [docker_version](#variable\docker_version)                                                                          | Docker version                                            | `latest`  |
-| <a name="docker_bash_completion_install"></a> [docker_bash_completion_install](#variable\_docker_bash_completion_install)                         | If True, Docker bash completion will be installed         | `true`    |
-| <a name="docker_daemon_config"></a> [docker_daemon_config](#variable\_docker_daemon_config)                                                       | Docker daemon configuration                               | `{}`      |
-| <a name="docker_service_enabled"></a> [docker_service_enabled](#variable\_docker_service_enabled)                                                 | Whether Docker service should start on boot               | `true`    |
-| <a name="docker_service_state"></a> [docker_service_state](#variable\_docker_service_state)                                                       | State of Docker service                                   | `started` |
-| <a name="docker_users"></a> [docker_users](#variable\_docker_users)                                                                               | List of users to be added to docker group                 | `[]`      |
-| <a name="docker_sdk_for_python_install"></a> [docker_sdk_for_python_install](#variable\_docker_sdk_for_python_install)                            | If True, Docker SDK for Python will be installed          | `false`   |
-| <a name="docker_sdk_for_python_version"></a> [docker_sdk_for_python_version](#variable\_docker_sdk_for_python_version)                            | Docker SDK for Python version                             | `latest`  |
-| <a name="docker_compose_install"></a> [docker_compose_install](#variable\_docker_compose_install)                                                 | If True, Docker Compose will be installed                 | `false`   |
-| <a name="docker_compose_version"></a> [docker_compose_version](#variable\_docker_compose_version)                                                 | Docker Compose version                                    | `latest`  |
-| <a name="docker_compose_bash_completion_install"></a> [docker_compose_bash_completion_install](#variable\_docker_compose_bash_completion_install) | If True, Docker Compose bash completion will be installed | `true`    |
+| Name                                                                                                                                              | Description                                               | Default                                 |
+|---------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|-----------------------------------------|
+| <a name="docker_supported_architectures"></a> [docker_supported_architectures](#variable\_docker_supported_architectures)                         | List of Docker supported architectures                    | `["x86_64", "arm64", "armhf", "s390x"]` |
+| <a name="docker_install"></a> [docker_install](#variable\_docker_install)                                                                         | If True, Docker will be installed                         | `true`                                  |
+| <a name="docker_version"></a> [docker_version](#variable\docker_version)                                                                          | Docker version                                            | `latest`                                |
+| <a name="docker_bash_completion_install"></a> [docker_bash_completion_install](#variable\_docker_bash_completion_install)                         | If True, Docker bash completion will be installed         | `true`                                  |
+| <a name="docker_daemon_config"></a> [docker_daemon_config](#variable\_docker_daemon_config)                                                       | Docker daemon configuration                               | `{}`                                    |
+| <a name="docker_service_enabled"></a> [docker_service_enabled](#variable\_docker_service_enabled)                                                 | Whether Docker service should start on boot               | `true`                                  |
+| <a name="docker_service_state"></a> [docker_service_state](#variable\_docker_service_state)                                                       | State of Docker service                                   | `started`                               |
+| <a name="docker_users"></a> [docker_users](#variable\_docker_users)                                                                               | List of users to be added to docker group                 | `[]`                                    |
+| <a name="docker_sdk_for_python_install"></a> [docker_sdk_for_python_install](#variable\_docker_sdk_for_python_install)                            | If True, Docker SDK for Python will be installed          | `false`                                 |
+| <a name="docker_sdk_for_python_version"></a> [docker_sdk_for_python_version](#variable\_docker_sdk_for_python_version)                            | Docker SDK for Python version                             | `latest`                                |
+| <a name="docker_compose_install"></a> [docker_compose_install](#variable\_docker_compose_install)                                                 | If True, Docker Compose will be installed                 | `false`                                 |
+| <a name="docker_compose_version"></a> [docker_compose_version](#variable\_docker_compose_version)                                                 | Docker Compose version                                    | `latest`                                |
+| <a name="docker_compose_bash_completion_install"></a> [docker_compose_bash_completion_install](#variable\_docker_compose_bash_completion_install) | If True, Docker Compose bash completion will be installed | `true`                                  |
 
 ## Usage
 
