@@ -42,7 +42,7 @@
 
 - name: Install Docker.
   yum:
-    update_cache: yes
+    update_cache: true
     name:
       - "docker-ce{% if docker_version != 'latest' %}-{{ docker_version }}{% endif %}"
       - "docker-ce-cli{% if docker_version != 'latest' %}-{{ docker_version }}{% endif %}"
@@ -52,7 +52,7 @@
 
 - name: Install Docker.
   dnf:
-    update_cache: yes
+    update_cache: true
     name:
       - "docker-ce{% if docker_version != 'latest' %}-{{ docker_version }}{% endif %}"
       - "docker-ce-cli{% if docker_version != 'latest' %}-{{ docker_version }}{% endif %}"
