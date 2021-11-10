@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.3.0 (November 11th, 2021)
+
+BUG FIXES:
+
+* Fixed bash completion install for Docker Compose (```docker_compose_bash_completion_install```).
+* Added linters and fixed all related lint issues.
+
 ## 1.2.0 (September 9th, 2021)
 
 CHANGES:
