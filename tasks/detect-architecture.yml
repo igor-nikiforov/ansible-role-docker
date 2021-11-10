@@ -1,5 +1,6 @@
 ---
-- fail:
+- name: Check if architecture is supported.
+  fail:
     msg: "{{ ansible_architecture }} is not supported by Docker!"
   when: ansible_architecture not in docker_supported_architectures
 

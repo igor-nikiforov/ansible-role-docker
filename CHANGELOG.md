@@ -1,5 +1,6 @@
-## 1.2.0
-### September 9th, 2021
+# Changelog
+
+## 1.2.0 (September 9th, 2021)
 
 CHANGES:
 
@@ -10,8 +11,7 @@ BUG FIXES:
 
 * Fixed ```when``` condition in RHEL version detection.
 
-## 1.1.0
-### August 9th, 2021
+## 1.1.0 (August 9th, 2021)
 
 CHANGES:
 
@@ -25,8 +25,7 @@ BUG FIXES:
 * Fixed repo file name when using RHEL.
 * Checked and fixed YAML syntax with ```yamllint```.
 
-## 1.0.0
-### November 17th, 2020
+## 1.0.0 (November 17th, 2020)
 
 CHANGES:
 

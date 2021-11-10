@@ -24,7 +24,8 @@
   include_tasks: configure-docker-daemon.yml
   when: docker_daemon_config | length > 0
 
-- meta: flush_handlers
+- name: Restart Docker.
+  meta: flush_handlers
 
 - name: Add users to docker group.
   include_tasks: add-docker-users.yml
@@ -40,4 +41,4 @@
 
 - name: Install Docker Compose bash completion.
   include_tasks: install-docker-compose-bash-completion.yml
-  when: docker_compose_install and docker_compose_bash_completion_install  
+  when: docker_compose_install and docker_compose_bash_completion_install
