@@ -17,7 +17,7 @@
 - name: Set system architecture for armhf.
   set_fact:
     arch: "armhf"
-  when: ansible_architecture == "armhf"
+  when: ansible_architecture in ["armhf", "armv7l"]
 
 - name: Set system architecture for s390x
   set_fact:
