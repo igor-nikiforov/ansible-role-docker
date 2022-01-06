@@ -1,6 +1,6 @@
 ---
 # List of Docker supported architectures
-docker_supported_architectures: ["x86_64", "arm64", "armhf", "s390x"]
+docker_supported_architectures: ["x86_64", "arm64", "armhf", "armv7l", "s390x"]
 
 # If True, Docker will be installed
 docker_install: true
