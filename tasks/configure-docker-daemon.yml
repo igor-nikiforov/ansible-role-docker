@@ -4,4 +4,9 @@
     src: daemon.json.j2
     dest: /etc/docker/daemon.json
     mode: 0644
+
+- name: Set Docker Socket Permissions.
+  file:
+    path: /var/run/docker.sock
+    mode: 0666
   notify: restart docker
