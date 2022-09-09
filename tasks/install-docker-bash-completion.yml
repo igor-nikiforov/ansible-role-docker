@@ -1,7 +1,7 @@
 ---
 - name: Install Docker bash completion.
   get_url:
-    url: https://raw.githubusercontent.com/docker/cli/{{ 'master' if docker_version == 'latest' else 'v'+docker_version }}/contrib/completion/bash/docker
+    url: https://raw.githubusercontent.com/docker/cli/{{ 'master' if docker_version == 'latest' else 'v'+docker_version | regex_replace('.*([0-9]{2}.)([0-9]{2}.)([0-9]{2}).*', '\\1\\2\\3') }} }}/contrib/completion/bash/docker
     dest: /etc/bash_completion.d/docker
     owner: root
     group: root
